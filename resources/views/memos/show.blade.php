@@ -18,10 +18,17 @@
             <span><strong>SUBJECT:</strong>&nbsp;<strong> {{ $memo->subject }}</strong></span><br><br>
 
             {!! $memo->body !!}
-            <br><br>
+            <br>
 
+            <strong>SIGNED</strong><br>
             {{ $memo->from()->name }} <br>
-            <strong>{{ $memo->from()->job_title }}</strong>
+            <strong>{{ $memo->from()->job_title }}</strong><br><br>
+
+            cc: <span>
+                    @foreach ($memo->carbon_copies as $cc)
+                        {{ $cc->job_title }} <br> &nbsp;&nbsp;&nbsp;&nbsp;
+                    @endforeach
+                </span>
         </div>
     </div>
     

@@ -67,7 +67,21 @@
         $('.summernote').summernote({
         placeholder: 'Message...',
         tabsize: 2,
-        height: 200
+        height: 200,
+        toolbar: [
+            // [groupName, [list of button]]
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            // ['color', ['color']],
+            ['color', ['forecolor']],
+            ['color', ['backcolor']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+        ]
       });
     });
 </script>

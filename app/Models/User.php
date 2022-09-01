@@ -8,8 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -41,4 +40,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function memos() {
+        return $this->belongsToMany(Memo::class);
+    }
+
+    // No onbehalf model created. Just pivot table and user model pointing to itself
+    public function onbehalf() {
+        return $this->belongsToMany(User::class, 'onbehalf_users', 'user_id', 'onbehalf_id');
+    }
 }

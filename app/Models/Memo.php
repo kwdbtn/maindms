@@ -19,4 +19,8 @@ class Memo extends Model {
     public function to() {
         return User::find($this->recipient);
     }
+
+    public function carbon_copies() {
+        return $this->belongsToMany(User::class);
+    }
 }

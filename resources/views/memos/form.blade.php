@@ -20,16 +20,23 @@
                     !!}
 
                     <div class="form-group row">
+                        {!! Form::label('sender', 'Sender:', ['class' => 'control-label col-sm-2 text-end']) !!}
+                        <div class="col-sm-10">
+                            {{Form::select('sender', $arr['users'], null, ['class' => 'form-control col-md-10 col-xs-10'])}}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         {!! Form::label('recipient', 'Recipient:', ['class' => 'control-label col-sm-2 text-end']) !!}
                         <div class="col-sm-10">
                             {{Form::select('recipient', $arr['users'], null, ['class' => 'form-control col-md-10 col-xs-10'])}}
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        {!! Form::label('sender', 'Sender:', ['class' => 'control-label col-sm-2 text-end']) !!}
+                    <div class="form-group row mt-1">
+                        {!! Form::label('carbon_copies', 'CC:', ['class' => 'control-label col-sm-2 text-end']) !!}
                         <div class="col-sm-10">
-                            {{Form::select('sender', $arr['users'], null, ['class' => 'form-control col-md-10 col-xs-10'])}}
+                        {!! Form::select('carbon_copies[]',$arr['users'],isset($memo->carbon_copies) ? $memo->carbon_copies->pluck('id')->toArray() : null,['class'=>'form-control col-md-10 col-xs-12 select2', 'multiple']) !!}
                         </div>
                     </div>
 

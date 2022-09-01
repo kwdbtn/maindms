@@ -12,7 +12,7 @@ class MemoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $memos = Memo::all();
+        $memos = Memo::orderBy('created_at', 'desc')->get();
         return view('memos.index', compact('memos'));
     }
 
@@ -36,7 +36,7 @@ class MemoController extends Controller {
         $filenameAttachment = 'attachment' . time() . '.' . $attachment->getClientOriginalExtension();
         $pathAttachment     = $attachment->storeAs('MemoAttachments', $filenameAttachment);
 
-        Memo::create([
+        $memo = Memo::create([
             'sender'     => $request->sender,
             'recipient'  => $request->recipient,
             'date'       => date('Y-m-d', strtotime($request->date)),
@@ -46,6 +46,8 @@ class MemoController extends Controller {
             'attachment' => $pathAttachment,
             'status'     => 'pending',
         ]);
+
+        $memo->carbon_copies()->sync($request->carbon_copies);
 
         return redirect()->route('memos.index');
     }
@@ -57,6 +59,7 @@ class MemoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Memo $memo) {
+        // dd($memo->carbon_copies);
         return view('memos.show', compact('memo'));
     }
 
