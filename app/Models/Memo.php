@@ -9,7 +9,7 @@ class Memo extends Model {
     use HasFactory;
 
     protected $fillable = [
-        'sender', 'recipient', 'date', 'file_no', 'subject', 'body', 'attachment', 'status',
+        'sender', 'recipient', 'date', 'file_no', 'subject', 'body', 'status', 'status_info',
     ];
 
     public function from() {

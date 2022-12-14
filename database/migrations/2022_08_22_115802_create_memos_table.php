@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->text('body');
             $table->string('attachment')->nullable();
             $table->string('status');
+            $table->string('status_info');
             $table->timestamps();
         });
     }

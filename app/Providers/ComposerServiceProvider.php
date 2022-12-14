@@ -21,7 +21,7 @@ class ComposerServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
-        view()->composer('memos.form', function ($view) {
+        view()->composer(['memos.form', 'users.form'], function ($view) {
             $arr = [
                 'users' => User::pluck('name', 'id'),
             ];

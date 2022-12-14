@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MemoController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,7 @@ Route::get('/', [App\Http\Controllers\MemoController::class, 'index'])->name('ho
 
 Route::resources([
     'memos' => MemoController::class,
+    'users' => UserController::class,
 ]);
 
 Auth::routes();

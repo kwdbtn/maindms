@@ -16,7 +16,7 @@
 
                     {!! Form::model($memo, ['method' => $memo->exists ? 'PUT' : 'POST', 
                     'route' => $memo->exists ? ['memos.update', $memo] : ['memos.store'],
-                    'class' => 'form-horizontal', 'enctype' => 'Multipart/form-data', 'files'=>true])
+                    'class' => 'form-horizontal'])
                     !!}
 
                     <div class="form-group row">
@@ -77,16 +77,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        {!! Form::label('attachment', 'Attachment:', ['class' => 'control-label col-sm-2 text-end']) !!}
-                        <div class="col-md-6 col-sm-6 ">
-                            <input name="attachment" type="file" class="form-control result-file" required>
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <div class="offset-sm-2 mt-1">
-                            <button type="submit" class="btn btn-dark">{{ $memo->exists ? @"Update" : @"Create" }}</button>
+                            <button type="submit" class="btn btn-dark">{{ $memo->exists ? @"Update" : @"Save" }}</button>
+
+                            @if ($memo->status == 'pending' && auth()->user()->id == $memo->sender)
+                                <button type="submit" class="btn btn-dark">Send Memo</button>
+                            @endif
                         </div>
                     </div>
                     {!! Form::close() !!}
