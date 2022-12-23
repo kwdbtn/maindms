@@ -39,7 +39,7 @@ class MemoController extends Controller {
             'file_no'   => $request->file_no,
             'subject'   => $request->subject,
             'body'      => $request->body,
-            'status'    => 'pending',
+            'status'    => 'Draft',
         ]);
 
         $memo->carbon_copies()->sync($request->carbon_copies);
@@ -75,7 +75,9 @@ class MemoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Memo $memo) {
-        //
+        if (request()->has('send')) {
+            dd('in here x');
+        }
     }
 
     /**

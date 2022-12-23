@@ -81,8 +81,8 @@
                         <div class="offset-sm-2 mt-1">
                             <button type="submit" class="btn btn-dark">{{ $memo->exists ? @"Update" : @"Save" }}</button>
 
-                            @if ($memo->status == 'pending' && auth()->user()->id == $memo->sender)
-                                <button type="submit" class="btn btn-dark">Send Memo</button>
+                            @if ($memo->status == 'Draft' && auth()->user()->id == $memo->sender)
+                                <button type="submit" name="send" class="btn btn-dark">Send</button>
                             @endif
                         </div>
                     </div>
