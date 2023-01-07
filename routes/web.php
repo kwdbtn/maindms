@@ -23,6 +23,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\MemoController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\MemoController::class, 'index'])->name('home');
+Route::get('memos/tray', [MemoController::class, 'tray'])->name('tray');
 
 Route::resources([
     'memos' => MemoController::class,

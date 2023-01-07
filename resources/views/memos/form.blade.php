@@ -7,9 +7,9 @@
             <div class="card">
                 <div class="card-body">
                     <h4>
-                        <strong>{{ $memo->exists ? "Editing '".$memo->file_no."'" : "Memo" }}</strong>
+                        <strong><i class="fa fa-file-o" aria-hidden="true"></i>&nbsp; {{ $memo->exists ? "Editing '".$memo->file_no."'" : "Memo" }}</strong>
                         <span>
-                            <a href="{{ route('memos.index') }}" class="btn btn-sm btn-dark float-end">Back</a>
+                            <a href="{{ route('memos.index') }}" class="btn btn-sm btn-dark float-end"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp; Back</a>
                         </span>
                     </h4>
                     <hr>
@@ -22,7 +22,7 @@
                     <div class="form-group row">
                         {!! Form::label('sender', 'Sender:', ['class' => 'control-label col-sm-2 text-end']) !!}
                         <div class="col-sm-10">
-                            {{Form::select('sender', $arr['users'], null, ['class' => 'form-control col-md-10 col-xs-10'])}}
+                            {{Form::select('sender', $senders, null, ['class' => 'form-control col-md-10 col-xs-10'])}}
                         </div>
                     </div>
 

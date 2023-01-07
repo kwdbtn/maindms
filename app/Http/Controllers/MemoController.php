@@ -6,13 +6,37 @@ use App\Models\Memo;
 use Illuminate\Http\Request;
 
 class MemoController extends Controller {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $memos = Memo::orderBy('created_at', 'desc')->get();
+        $memos = collect([]);
+
+        if (auth()->user()->hasRole('assistant')) {
+            foreach (auth()->user()->onbehalf as $onbehalf) {
+                $userMemos = Memo::where('sender', $onbehalf->id)->get();
+                foreach ($userMemos as $memo) {
+                    $memos->push($memo);
+                }
+            }
+        } else if (auth()->user()->hasRole('manager')) {
+            $memos = Memo::where('sender', auth()->user()->id)->get();
+        } else {
+            $memos = collect([]);
+        }
+
         return view('memos.index', compact('memos'));
     }
 
@@ -76,8 +100,19 @@ class MemoController extends Controller {
      */
     public function update(Request $request, Memo $memo) {
         if (request()->has('send')) {
-            dd('in here x');
+            $memo->update([
+                'status' => 'Sent',
+            ]);
         }
+
+        return redirect()->route('memos.index');
+    }
+
+    public function tray() {
+        $memos = Memo::where('recipient', auth()->user()->id)
+            ->where('status', 'Sent')
+            ->get();
+        return view('memos.index', compact('memos'));
     }
 
     /**

@@ -22,7 +22,6 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create(User $user) {
-        dd($user);
         return view('users.form', compact('user'));
     }
 
@@ -65,6 +64,12 @@ class UserController extends Controller {
      */
     public function update(Request $request, User $user) {
         $user->onbehalf()->sync($request->input('onbehalf'));
+
+        // foreach ($request->input('onbehalf') as $userID) {
+        //     $person = User::find($userID);
+        //     $person->onbehalf()->sync($user->id);
+        // }
+
         return redirect()->route('users.show', $user);
     }
 
