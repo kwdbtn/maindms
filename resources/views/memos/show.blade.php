@@ -12,6 +12,7 @@
                     @if ($memo->status == "Draft")
                         <a href="{{ route('memos.edit', $memo) }}" class="btn btn-sm btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; Edit</a>
                     @endif
+                    <a class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; Minute Memo</a>
                     <a href="{{ route('memos.index') }}" class="btn btn-sm btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp; Back</a>
                 </div>
             </h5>
@@ -42,7 +43,32 @@
                 </span>
         </div>
     </div>
-    
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Minute Memo</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {!! Form::open(['url' => 'foo/bar']) !!}
+            <div class="form-group row">
+                {!! Form::label('body', 'Body:', ['class' => 'control-label col-sm-2 text-end']) !!}
+                <div class="col-sm-10">
+                    {!! Form::textArea('body', null, ['class'=>'form-control col-md-12 col-xs-12 summernote']) !!}
+                </div>
+            </div>
+        {!! Form::close() !!}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
